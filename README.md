@@ -121,3 +121,13 @@ Before using GitHub Actions, set up the following repository secrets:
 
 ## License
 This project is licensed under the MIT License.
+
+
+
+---
+
+## Made by ChatGPT
+
+このプロジェクトはすべて ChatGPT に作ってもらいました！！！！！！！！！！！！！！！！！！！！！！！！
+
+https://chatgpt.com/share/67bafbf6-9e7c-8005-8ba6-b7116a94a9f0
