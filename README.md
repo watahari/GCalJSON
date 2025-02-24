@@ -64,7 +64,7 @@ Below is a sample `docker-compose.yaml` file to run GCalJSON:
 version: "3"
 services:
   gcaljson:
-    build: .
+    image: watahari/gcaljson
     ports:
       - "8080:8080"
     environment:
