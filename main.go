@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -31,7 +32,7 @@ type Event struct {
 }
 
 // eventCache は Google Calendar API の結果をキャッシュします。
-// ※ キャッシュ期間は環境変数 GCALJSON_CACHE_DURATION (例:"5m") から設定します。
+// キャッシュ期間は環境変数 GCALJSON_CACHE_DURATION (例:"5m") から設定します。
 var eventCache *cache.Cache
 
 // transformEvent は Google Calendar のイベントを GCalJSON 用の形式に変換します。
@@ -134,11 +135,12 @@ func getEventsHandler(srv *calendar.Service, calendarID string) http.HandlerFunc
 
 func main() {
 	// 環境変数は接頭辞 GCALJSON_ を利用
-	credentialsJSON := os.Getenv("GCALJSON_GOOGLE_CREDENTIALS")
+	// Base64エンコードされた認証情報をデコードして使用する
+	encodedCred := os.Getenv("GCALJSON_GOOGLE_CREDENTIAL")
 	calendarID := os.Getenv("GCALJSON_GOOGLE_CALENDAR_ID")
 	cacheDurationStr := os.Getenv("GCALJSON_CACHE_DURATION")
-	if credentialsJSON == "" || calendarID == "" {
-		log.Fatal("GCALJSON_GOOGLE_CREDENTIALS と GCALJSON_GOOGLE_CALENDAR_ID を設定してください")
+	if encodedCred == "" || calendarID == "" {
+		log.Fatal("GCALJSON_GOOGLE_CREDENTIAL と GCALJSON_GOOGLE_CALENDAR_ID を設定してください")
 	}
 	if cacheDurationStr == "" {
 		cacheDurationStr = "5m"
@@ -150,8 +152,13 @@ func main() {
 	// キャッシュの有効期間は環境変数から設定（クリーニング間隔は2倍の期間）
 	eventCache = cache.New(cacheDuration, 2*cacheDuration)
 
+	credJSON, err := base64.StdEncoding.DecodeString(encodedCred)
+	if err != nil {
+		log.Fatalf("Failed to decode credentials: %v", err)
+	}
+
 	ctx := context.Background()
-	srv, err := calendar.NewService(ctx, option.WithCredentialsJSON([]byte(credentialsJSON)))
+	srv, err := calendar.NewService(ctx, option.WithCredentialsJSON(credJSON))
 	if err != nil {
 		log.Fatalf("Google Calendar サービスの作成に失敗: %v", err)
 	}
