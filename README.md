@@ -86,7 +86,7 @@ To integrate GCalJSON with Grafana's Business Calendar Plugin, follow these step
 2. **Add a JSON Data Source**:
   * Go to Configuration > Data Sources in Grafana and click Add data source.
   * Select a JSON API data source plugin (if not already available, install a compatible JSON data source plugin).
-  * Set the URL to point to your GCalJSON instance (e.g., `http://<your-server-ip>:8080` ).
+  * Set the URL to point to your GCalJSON instance (e.g., `http://<your-server-ip>:8080/events` ).
 3. **Create a Dashboard Panel**:
   * Create a new dashboard panel and choose Business Calendar as the panel type.
   * Configure the panel to use the JSON data source you just added.
