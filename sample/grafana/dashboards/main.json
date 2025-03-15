@@ -1,0 +1,135 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "P4496513A125DCAAD"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "annotations": false,
+        "annotationsLimit": 100,
+        "annotationsType": "",
+        "colors": "event",
+        "dateFormat": "inherit",
+        "defaultView": "month",
+        "displayFields": [
+          "description",
+          "labels",
+          "links",
+          "location",
+          "text",
+          "time"
+        ],
+        "endTimeField": "end",
+        "locationLabel": "",
+        "preformattedDescription": false,
+        "quickLinks": false,
+        "scrollToTime": {
+          "hours": 0,
+          "minutes": 0
+        },
+        "showEventTooltip": false,
+        "showMonthTime": true,
+        "textField": "title",
+        "timeField": "start",
+        "timeRangeType": "default",
+        "views": [
+          "day",
+          "week",
+          "month"
+        ]
+      },
+      "pluginVersion": "3.9.0",
+      "targets": [
+        {
+          "columns": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "P4496513A125DCAAD"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Panel Title",
+      "type": "marcusolsson-calendar-panel"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "New dashboard",
+  "uid": "befwdwnx7e8zka",
+  "version": 2,
+  "weekStart": ""
+}

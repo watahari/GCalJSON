@@ -1,0 +1,26 @@
+services:
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_anonymous_ORG_ROLE=Viewer
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource,marcusolsson-calendar-panel
+    volumes:
+     - './grafana/datasources:/etc/grafana/provisioning/datasources'
+     - './grafana/dashboard-settings:/etc/grafana/provisioning/dashboards'
+     - './grafana/dashboards:/var/lib/grafana/dashboards'
+    restart: always
+
+  gcaljson:
+    image: watahari/gcaljson
+    container_name: gcaljson
+    ports:
+      - 8080:8080
+    environment:
+      - GCALJSON_GOOGLE_CREDENTIAL
+      - GCALJSON_GOOGLE_CALENDAR_ID
+      - GCALJSON_CACHE_DURATION

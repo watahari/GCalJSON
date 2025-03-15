@@ -1,0 +1,6 @@
+apiVersion: 1
+
+datasources:
+  - name: GCalJSON
+    type: yesoreyeram-infinity-datasource
+    url: http://gcaljson:8080/events
