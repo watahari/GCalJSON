@@ -13,9 +13,11 @@ import (
 func TestTransformEvent(t *testing.T) {
 	// DateTime 指定の場合
 	ev1 := &calendar.Event{
-		Summary: "Test Event",
-		Start:   &calendar.EventDateTime{DateTime: "2023-02-23T10:00:00Z"},
-		End:     &calendar.EventDateTime{DateTime: "2023-02-23T11:00:00Z"},
+		Summary:     "Test Event",
+		Description: "Test Description",
+		Location:    "Test Location",
+		Start:       &calendar.EventDateTime{DateTime: "2023-02-23T10:00:00Z"},
+		End:         &calendar.EventDateTime{DateTime: "2023-02-23T11:00:00Z"},
 	}
 	res1 := transformEvent(ev1)
 	if res1.Title != "Test Event" {
@@ -27,12 +29,20 @@ func TestTransformEvent(t *testing.T) {
 	if res1.End != "2023-02-23T11:00:00Z" {
 		t.Errorf("Expected end '2023-02-23T11:00:00Z', got '%s'", res1.End)
 	}
+	if res1.Description != "Test Description" {
+		t.Errorf("Expected description 'Test Description', got '%s'", res1.Description)
+	}
+	if res1.Location != "Test Location" {
+		t.Errorf("Expected location 'Test Location', got '%s'", res1.Location)
+	}
 
 	// All-day イベントの場合
 	ev2 := &calendar.Event{
-		Summary: "All Day Event",
-		Start:   &calendar.EventDateTime{Date: "2023-02-24"},
-		End:     &calendar.EventDateTime{Date: "2023-02-25"},
+		Summary:     "All Day Event",
+		Description: "",
+		Location:    "",
+		Start:       &calendar.EventDateTime{Date: "2023-02-24"},
+		End:         &calendar.EventDateTime{Date: "2023-02-25"},
 	}
 	res2 := transformEvent(ev2)
 	if res2.Start != "2023-02-24" {
@@ -40,6 +50,12 @@ func TestTransformEvent(t *testing.T) {
 	}
 	if res2.End != "2023-02-25" {
 		t.Errorf("Expected end '2023-02-25', got '%s'", res2.End)
+	}
+	if res2.Description != "" {
+		t.Errorf("Expected empty description, got '%s'", res2.Description)
+	}
+	if res2.Location != "" {
+		t.Errorf("Expected empty location, got '%s'", res2.Location)
 	}
 }
 
