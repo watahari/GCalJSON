@@ -82,15 +82,33 @@ To integrate GCalJSON with Grafana's Business Calendar Plugin, follow these step
   * In Grafana, navigate to Configuration > Plugins.
   * Search for Business Calendar Plugin by Marcus Olsson.
   * Install the plugin (or use the CLI:  
-`grafana-cli plugins install marcusolsson-calendar-panel` ).
+    ```bash
+    grafana-cli plugins install marcusolsson-calendar-panel
+    ```
+    ).
+
 2. **Add a JSON Data Source**:
   * Go to Configuration > Data Sources in Grafana and click Add data source.
   * Select a JSON API data source plugin (if not already available, install a compatible JSON data source plugin).
-  * Set the URL to point to your GCalJSON instance (e.g., `http://<your-server-ip>:8080/events` ).
+  * Set the URL to point to your GCalJSON instance (e.g., `http://<your-server-ip>:8080/events`).
+
 3. **Create a Dashboard Panel**:
   * Create a new dashboard panel and choose Business Calendar as the panel type.
   * Configure the panel to use the JSON data source you just added.
-  * The JSON response provided by GCalJSON is expected to be an array of events, where each event includes `title`, `start`, and `end` fields. The Business Calendar Plugin will render these events accordingly.
+  * The JSON response provided by GCalJSON is expected to be an array of events, where each event includes `title`, `start`, `end`, `description`, and `location` fields. The Business Calendar Plugin will render these events accordingly.
+
+### Example JSON Response from GCalJSON
+```json
+[
+  {
+    "title": "Team Meeting",
+    "start": "2025-03-21T10:00:00Z",
+    "end": "2025-03-21T11:00:00Z",
+    "description": "Discussing the new project roadmap",
+    "location": "Conference Room A"
+  }
+]
+```
 
 For more details on the plugin, refer to the [Grafana Business Calendar Plugin page](https://grafana.com/grafana/plugins/marcusolsson-calendar-panel/).
 
@@ -115,15 +133,3 @@ Before using GitHub Actions, set up the following repository secrets:
 
 ## License
 This project is licensed under the MIT License.
-
-
-
----
-
-## Made by ChatGPT
-
-このプロジェクトはすべて ChatGPT に作ってもらいました！！！！！！！！！！！！！！！！！！！！！！！！
-
-https://chatgpt.com/share/67bafbf6-9e7c-8005-8ba6-b7116a94a9f0
-
-※最終的な手直しは少しだけやりましたが、ほぼぜんぶやってもらってます！

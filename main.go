@@ -26,9 +26,11 @@ import (
 // @BasePath /
 
 type Event struct {
-	Title string `json:"title"`
-	Start string `json:"start"`
-	End   string `json:"end"`
+	Title       string `json:"title"`
+	Start       string `json:"start"`
+	End         string `json:"end"`
+	Description string `json:"description,omitempty"`
+	Location    string `json:"location,omitempty"`
 }
 
 // eventCache は Google Calendar API の結果をキャッシュします。
@@ -46,9 +48,11 @@ func transformEvent(item *calendar.Event) Event {
 		end = item.End.Date
 	}
 	return Event{
-		Title: item.Summary,
-		Start: start,
-		End:   end,
+		Title:       item.Summary,
+		Start:       start,
+		End:         end,
+		Description: item.Description,
+		Location:    item.Location,
 	}
 }
 
