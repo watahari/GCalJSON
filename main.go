@@ -29,8 +29,8 @@ type Event struct {
 	Title       string `json:"title"`
 	Start       string `json:"start"`
 	End         string `json:"end"`
-	Description string `json:"description,omitempty"`
-	Location    string `json:"location,omitempty"`
+	Description string `json:"description"`
+	Location    string `json:"location"`
 }
 
 // eventCache は Google Calendar API の結果をキャッシュします。
@@ -46,6 +46,14 @@ func transformEvent(item *calendar.Event) Event {
 	end := item.End.DateTime
 	if end == "" {
 		end = item.End.Date
+	}
+	description := item.Description
+	if description == "" {
+		description = ""
+	}
+	location := item.Location
+	if location == "" {
+		location = ""
 	}
 	return Event{
 		Title:       item.Summary,
