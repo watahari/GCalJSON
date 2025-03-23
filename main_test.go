@@ -57,6 +57,20 @@ func TestTransformEvent(t *testing.T) {
 	if res2.Location != "" {
 		t.Errorf("Expected empty location, got '%s'", res2.Location)
 	}
+
+	// すべての項目が空でも正しく動作することを確認
+	ev3 := &calendar.Event{
+		Summary:  "Empty Fields Event",
+		Start:    &calendar.EventDateTime{DateTime: "2023-03-01T09:00:00Z"},
+		End:      &calendar.EventDateTime{DateTime: "2023-03-01T10:00:00Z"},
+	}
+	res3 := transformEvent(ev3)
+	if res3.Description != "" {
+		t.Errorf("Expected empty description, got '%s'", res3.Description)
+	}
+	if res3.Location != "" {
+		t.Errorf("Expected empty location, got '%s'", res3.Location)
+	}
 }
 
 func TestErrorResponse(t *testing.T) {
